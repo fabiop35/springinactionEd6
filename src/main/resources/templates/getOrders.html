@@ -1,0 +1,31 @@
+<html>
+ <head>
+   <title>Orders</title>
+
+</head>
+
+ <body>
+     <h1>Orders</h1>
+    <table>
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Delivery Name</th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${orders.empty}">
+            <td colspan="2"> No Orders Available </td>
+        </tr>
+        <tr th:each="order: ${orders}">
+            <td><span th:text="${order.id}"> Id </span></td>
+            <td><span th:text="${order.deliveryName}"> Delivery </span></td>
+        </tr>
+    </tbody>
+</table>
+     
+ </body>
+
+</html>
+
+
