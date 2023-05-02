@@ -22,28 +22,35 @@ import com.examples.springexsecurity.springinaction.tacos.TacoOrder;
 import com.examples.springexsecurity.springinaction.tacos.Taco;
 import com.examples.springexsecurity.springinaction.tacos.data.IngredientRepository;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import com.examples.springexsecurity.springinaction.tacos.data.User;
+
+import org.springframework.context.annotation.Bean;
+
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
-
+  
+  @Autowired
   private final IngredientRepository ingredientRepo;
 
   @Autowired
   public DesignTacoController(
-        IngredientRepository ingredientRepo) {
+           IngredientRepository ingredientRepo) {
     this.ingredientRepo = ingredientRepo;
   }
 
   @ModelAttribute
-  public void addIngredientsToModel(Model model) {
-    List<Ingredient1> ingredients = new ArrayList<>();
+  public void addIngredientsToModel(
+                               Model model) {
+    List<Ingredient1> ingredients = 
+                            new ArrayList<>();
     ingredientRepo.findAll().forEach(i -> ingredients.add(i));
 
     Type[] types = Ingredient1.Type.values();
     for (Type type : types) {
-      model.addAttribute(type.toString().toLowerCase(),
-          filterByType(ingredients, type));
+      model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
     }
   }
 
@@ -65,6 +72,7 @@ public class DesignTacoController {
 
   @PostMapping
   public String processTaco(
+      @AuthenticationPrincipal User user,
       @Valid Taco taco, Errors errors,
       @ModelAttribute TacoOrder tacoOrder) {
     
@@ -74,7 +82,7 @@ public class DesignTacoController {
       System.out.println("===>errors: "+errors);  
       return "design";
     }
-
+    tacoOrder.setUser(user);
     tacoOrder.addTaco(taco);
 
     return "redirect:/orders/current";

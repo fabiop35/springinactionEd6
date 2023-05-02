@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.examples.springexsecurity.springinaction.tacos.TacoOrder;
 import com.examples.springexsecurity.springinaction.tacos.data.OrderRepository;
+
+import com.examples.springexsecurity.springinaction.tacos.data.User;
 
 @Controller
 @RequestMapping("/orders")
@@ -24,8 +27,9 @@ public class OrderController {
 
   private OrderRepository orderRepo;
 
-  public OrderController(OrderRepository orderRepo) {
-    this.orderRepo = orderRepo;
+  public OrderController(OrderRepository
+                               orderRepo) {
+     this.orderRepo = orderRepo;
   }
 
   @GetMapping("/current")
@@ -42,6 +46,18 @@ public class OrderController {
         model.addAttribute("orders", orderRepo.findAll());
     
     return "getOrders";
+  }
+
+  @GetMapping
+  public String ordersForUser(
+          @AuthenticationPrincipal User user,
+                                   Model model){
+
+     model.addAttribute("orders", 
+        orderRepo.findByUserOrderByPlacedAtDesc(user));
+     System.out.println("### OrderController.ordersForUser.username: "+user.getUsername() );
+
+     return "orderList";
   }
 
   @PostMapping

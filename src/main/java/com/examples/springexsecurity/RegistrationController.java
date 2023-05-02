@@ -33,12 +33,11 @@ public class RegistrationController {
     @GetMapping
     public String registerForm() {
 
-        System.out.println("》》》RegistrationController.GET.return registration");
-
-        LOG.trace(">>> TRACE: RegistrationController <<<");
-        LOG.debug("This is a DEBUG log");
-        LOG.info("This is an INFO log");
-        LOG.error("This is an ERROR log");
+    System.out.println("》》》RegistrationController.GET.return registration");
+    LOG.trace(">>> TRACE: RegistrationController <<<");
+    LOG.debug("<<< RegistrationController.registerForm >>> - DEBUG log");
+    LOG.info("<<< RegistrationController.registerForm >>> - INFO log");
+    LOG.error("RegistrationController.registerForm >>> - ERROR log");
 
         return "registration";
     }
@@ -55,9 +54,10 @@ public class RegistrationController {
     @PostMapping
     public String processRegistration(
                  RegistrationForm form) {
-
-      userRepo.save(form.toUser(passwordEncoder));
-      System.out.println("》》》RegistrationController.POST.return login");
+    LOG.info("<<< RegistrationController.processRegistration.SAVE >>>");
+    userRepo.save(form.toUser(passwordEncoder));
+    LOG.info("<<< RegistrationController.forwardTO login PAGE >>>");
+    System.out.println("》》》RegistrationController.POST.return login");
       return "redirect:/login";
     }
 

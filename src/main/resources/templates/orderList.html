@@ -1,0 +1,36 @@
+
+<html>
+ <head>
+  <title>Orders By User</title>
+ </head>
+
+ <body>
+    
+    <h1>Orders By User</h1>
+    </br>
+    </br>
+
+    <table>
+     <thead>
+       <tr>
+        <th> Id </th>
+        <th> Delivery Name</th>
+        <th> Credit Card Number</th>
+       </tr>
+     </thead> 
+     <tbody>
+      <tr th:if="${orders.empty}">
+       <td colspan="2">No Orders Available</td>       </tr>
+      <tr th:each="order: ${orders}">
+      <td>
+          <span th:text="${order.id}"/>
+      </td>
+      <td th:text="${order.deliveryName}"/>
+      <td th:text="${order.ccNumber}" />
+      </tr>
+     </tbody>
+    </table>
+
+
+ </body> 
+</html>

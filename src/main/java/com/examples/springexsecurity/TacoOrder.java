@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -18,6 +19,8 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import lombok.Data;
+
+import com.examples.springexsecurity.springinaction.tacos.data.User;
 
 @Data
 @Entity
@@ -62,5 +65,8 @@ public class TacoOrder implements Serializable {
   public void addTaco(Taco taco) {
     this.tacos.add(taco);
   }
+
+  @ManyToOne
+  private User user;
 
 }

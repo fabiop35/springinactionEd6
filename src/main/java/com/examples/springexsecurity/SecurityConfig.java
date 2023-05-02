@@ -62,6 +62,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
           .logout().logoutSuccessUrl("/")
 
+        .and()
+         .csrf()
+          .ignoringAntMatchers("/h2-console/**")
+         //Allow frames same origin
+         .and()
+          .headers()
+           .frameOptions()
+            .sameOrigin()
+
+
         ;
         //http.csrf().disable();
     }
