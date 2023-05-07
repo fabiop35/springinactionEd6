@@ -23,7 +23,7 @@ public class SpringexsecurityApplication {
 	SpringApplication.run(SpringexsecurityApplication.class, args);
 	}
 
-  @Bean
+  /*@Bean
   public CommandLineRunner dataLoader(
                   IngredientRepository repo) {
     
@@ -42,6 +42,6 @@ public class SpringexsecurityApplication {
         repo.save(new Ingredient1("SRCR", "Sour Cream", Type.SAUCE));
       }
     };
-  }
+  }*/
 
 }
