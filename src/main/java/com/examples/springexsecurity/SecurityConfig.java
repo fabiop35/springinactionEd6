@@ -26,14 +26,16 @@ import com.examples.springexsecurity.springinaction.tacos.data.User;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig
+    extends WebSecurityConfigurerAdapter 
+    {
   
 
-    /** @Bean
+    /*@Bean
     public PasswordEncoder encoder() {
      //return new StandardPasswordEncoder("53cr3t");
        return NoOpPasswordEncoder.getInstance();
-    }**/ 
+    }*/
 
    @Autowired
    private UserDetailsService userDetailsService;
@@ -44,16 +46,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
          .authorizeRequests()
+            
+         //.anyRequest().permitAll();
+         
+.antMatchers(HttpMethod.POST, "/api/**")
+.access("permitAll")
 
-         //.antMatchers(HttpMethod.POST, "/design/**").permitAll()
+.antMatchers(HttpMethod.OPTIONS)
+.permitAll()
 
-            .antMatchers("/orders/**", "/design/**")
+.antMatchers("/orders/**", "/design/**")
              .access("hasRole('USER')")
             .antMatchers("/", "/**")
              .access("permitAll")
-            //.hasRole("USER")
-            //.access("permitAll")
-            //.anyRequest().permitAll()
 
         .and()
         .formLogin()
@@ -73,10 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
         ;
-        //http.csrf().disable();
+//disable in order to send post request
+    http.cors().and().csrf().disable();
     }
-
-    @Bean                                               public PasswordEncoder passwordEncoder(){
+ 
+ @Bean                          
+ public PasswordEncoder 
+   passwordEncoder(){
       return new BCryptPasswordEncoder();
     }
    

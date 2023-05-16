@@ -20,17 +20,17 @@ public class RegistrationController {
  private final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
     private UserRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+    //private PasswordEncoder passwordEncoder;
 
-    public RegistrationController(
+    /*public RegistrationController(
             UserRepository userRepo, 
             PasswordEncoder passwordEncoder) {
 
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
-    }
+    }*/
 
-    @GetMapping
+    /*@GetMapping
     public String registerForm() {
 
     System.out.println("》》》RegistrationController.GET.return registration");
@@ -40,7 +40,7 @@ public class RegistrationController {
     LOG.error("RegistrationController.registerForm >>> - ERROR log");
 
         return "registration";
-    }
+    }*/
 
     @GetMapping("/getUser")
     public String getUser(Model model){
@@ -51,7 +51,7 @@ public class RegistrationController {
 
     }
 
-    @PostMapping
+    /*@PostMapping
     public String processRegistration(
                  RegistrationForm form) {
     LOG.info("<<< RegistrationController.processRegistration.SAVE >>>");
@@ -59,7 +59,7 @@ public class RegistrationController {
     LOG.info("<<< RegistrationController.forwardTO login PAGE >>>");
     System.out.println("》》》RegistrationController.POST.return login");
       return "redirect:/login";
-    }
+    }*/
 
 }
 

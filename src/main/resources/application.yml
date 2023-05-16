@@ -10,6 +10,8 @@ spring:
     generate-unique-name: false
   thymeleaf:
      cache: false
+  security:
+     enabled: false
 
 #server.port=8443
 #server.ssl.key-store=classpath:tomcat.jks
@@ -31,6 +33,13 @@ logging:
 taco:
  orders:
   pageSize: 2
+
+management: 
+    security: 
+        enabled: false
+         
+security:
+  ignored: /**
 
 ---
 spring:

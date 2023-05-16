@@ -14,7 +14,14 @@ import com.examples.springexsecurity.springinaction.tacos.Ingredient1;
 
 import com.examples.springexsecurity.springinaction.tacos.data.IngredientRepository;
 
-@SpringBootApplication
+import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+
+
+
+
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class})
 //@ComponentScan(basePackages = "com.examples.springexsecurity")
 //@ComponentScan(basePackageClasses =com.examples.springexsecurity.HomeController.class)
 public class SpringexsecurityApplication {

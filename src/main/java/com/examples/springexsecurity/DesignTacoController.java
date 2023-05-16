@@ -23,6 +23,7 @@ import com.examples.springexsecurity.springinaction.tacos.Taco;
 import com.examples.springexsecurity.springinaction.tacos.data.IngredientRepository;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import com.examples.springexsecurity.springinaction.tacos.data.User;
 
 import org.springframework.context.annotation.Bean;
