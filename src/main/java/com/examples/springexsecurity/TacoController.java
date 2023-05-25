@@ -30,6 +30,7 @@ import com.examples.springexsecurity.springinaction.tacos.TacoOrder;
 
 
 @RestController
+//RestController Commented to use Spring Data REST
 @RequestMapping(path="/api/tacos", produces="application/json")
 //@CrossOrigin(origins="http://localhost:8081")
 @CrossOrigin

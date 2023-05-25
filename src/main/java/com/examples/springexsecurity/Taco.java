@@ -12,12 +12,15 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import lombok.Data;
 
 import com.examples.springexsecurity.springinaction.tacos.Ingredient1; 
 
 @Data
 @Entity
+@RestResource(rel="tacos", path="tacos")
 public class Taco {
 
   @Id
