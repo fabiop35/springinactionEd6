@@ -1,11 +1,17 @@
 package com.examples.springexsecurity.springinaction.tacos.config;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.examples.springexsecurity.springinaction.tacos.data.User;
@@ -15,10 +21,14 @@ import com.examples.springexsecurity.springinaction.tacos.Ingredient1.Type;
 import com.examples.springexsecurity.springinaction.tacos.data.IngredientRepository;
 import com.examples.springexsecurity.springinaction.tacos.data.UserRepository;
 import com.examples.springexsecurity.springinaction.tacos.data.TacoRepository;
+import com.examples.springexsecurity.springinaction.restclient.TacoRestClient;
 
 @Profile("!prod")
 @Configuration
 public class DevelopmentConfig {
+
+  @Autowired
+  private TacoRestClient tacoClient;
 
   @Bean
   public CommandLineRunner dataLoader(
@@ -100,7 +110,40 @@ Ingredient1 sourCream =
   flourTortilla, cornTortilla, tomatoes,
   lettuce, salsa));
   tacoRepo.save(taco3);
- 
+
+  /* Rest Taco Client */ 
+  //GET
+  System.out.println("XXXXXXXXXXXX > Taco Rest Client < XXXXXXXXXXXXX");
+ System.out.println("》Taco:  " + tacoClient.getTacoById("2")); 
+  //PUT
+  System.out.println("》》》PUT 《《《");
+  Taco taco = new Taco();
+  long lId = 2;
+  taco.setId(lId);
+  taco.setName("PutModified");
+  Date createdAt = new Date();
+  taco.setCreatedAt(createdAt);
+  List<Ingredient1> ingredients = 
+                    new ArrayList<>();
+  //Ingredient1 salsa = 
+   // new Ingredient1("SLSA", "Salsa", Type.SAUCE);
+  ingredients.add(salsa);
+  taco.setIngredients(ingredients);    
+
+  tacoClient.updateTaco(taco);
+
+  //DELETE
+  tacoClient.deleteTaco(taco);
+  //POST
+  System.out.println("》》》POST 《《《");
+  Taco tacoPost = new Taco();
+  //long lId = 2;
+  //taco.setId(lId);
+  tacoPost.setName("PostCreated");
+  tacoPost.setCreatedAt(createdAt);
+  tacoPost.setIngredients(ingredients);
+  System.out.println("Taco Created: "
+        +tacoClient.createTaco(tacoPost));
       }
     };
   }

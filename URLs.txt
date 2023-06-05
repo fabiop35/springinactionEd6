@@ -1,0 +1,18 @@
+curl localhost:8081/api/tacos/2
+curl localhost:8081/api/tacos?recent=1
+curl localhost:8081/data-api
+curl localhost:8081/data-api/tacos
+curl -X POST localhost:8081/api/tacos -H "Content-Type: application/json" -d '{id: 6, name: "tacoPost", createdat: "2023-05-15 14:43:54.59" }' -v
+curl localhost:8081/login
+curl localhost:8081/ingredient1s/FLTO
+curl localhost:8081/data-api/ingredient1s/FLTO
+curl -X DELETE localhost:8081/api/tacos/3 -v
+
+curl localhost:8081/api/tacos/2 -X PATCH -H "Content-Type: application/json" -d '{"name":"CarnivorePatchWithName","ingredients":[ {"id":"CHED","name":"Cheddar","type":"CHEESE"}]}' -v
+
+curl localhost:8081/api/tacos/10
+curl -X POST localhost:8081/api/tacos -H "Content-Type: application/json" -d '{"name":"Carnivore1uuu-","createdAt":"2023-05-15T14:43:54.590+00:00","ingredients":[{"id":"FLTO","name":"Flour Tortilla","type":"WRAP"}] }' -v
+curl localhost:8081/api/tacos/8
+curl localhost:8081/api/tacos/2
+curl localhost:8081/api/tacos -X PUT -H "Content-Type: application/json" -d '{"id":2,"name":"CarnivorePuTModId2","createdAt":"2023-05-16T18:38:12.787+00:00","ingredients":[ {"id":"CHED","name":"Cheddar","type":"CHEESE"}]}'
+
