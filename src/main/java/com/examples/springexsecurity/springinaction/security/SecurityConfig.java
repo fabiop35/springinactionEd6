@@ -1,4 +1,4 @@
-package com.examples.springexsecurity.springinactiontacos.security;
+package com.examples.springexsecurity.springinaction.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +18,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.examples.springexsecurity.springinaction.tacos.data.UserRepository;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import com.examples.springexsecurity.springinaction.tacos.data.User;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig
     extends WebSecurityConfigurerAdapter 
     {
@@ -41,23 +42,20 @@ public class SecurityConfig
    private UserDetailsService userDetailsService;
     
     @Override
-    protected void configure(HttpSecurity http)
-       throws Exception{
+    protected void configure(
+       HttpSecurity http) throws Exception{
 
-        http
-         .authorizeRequests()
+        http.httpBasic();
+        http.authorizeRequests()
             
-         //.anyRequest().permitAll();
-         
-.antMatchers(HttpMethod.POST, "/api/**")
-.access("permitAll")
+  /*.mvcMatchers(HttpMethod.GET, "/api/**")
+   .access("permitAll") */
+  .mvcMatchers(HttpMethod.POST, "/api/**")
+   .authenticated()
 
-.antMatchers(HttpMethod.OPTIONS)
-.permitAll()
-
-.antMatchers("/orders/**", "/design/**")
+   .mvcMatchers("/orders/**", "/design/**")
              .access("hasRole('USER')")
-            .antMatchers("/", "/**")
+            .mvcMatchers("/", "/**")
              .access("permitAll")
 
         .and()

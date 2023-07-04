@@ -1,9 +1,0 @@
-package com.examples.springexsecurity.springinaction.tacos.services;
-
-
-public interface UserDetailsService{
-
-  UserDetails loadUserByUsername(String username) 
-          throws UsernameNotFoundException;
-
-}

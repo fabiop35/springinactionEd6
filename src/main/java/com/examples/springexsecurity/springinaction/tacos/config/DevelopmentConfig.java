@@ -114,7 +114,8 @@ Ingredient1 sourCream =
   /* Rest Taco Client */ 
   //GET
   System.out.println("XXXXXXXXXXXX > Taco Rest Client < XXXXXXXXXXXXX");
- System.out.println("》Taco:  " + tacoClient.getTacoById("2")); 
+  //COMMENTED AFTER ENABLED AUTH
+ //System.out.println("》Taco:  " + tacoClient.getTacoById("2")); 
   //PUT
   System.out.println("》》》PUT 《《《");
   Taco taco = new Taco();
@@ -129,11 +130,12 @@ Ingredient1 sourCream =
    // new Ingredient1("SLSA", "Salsa", Type.SAUCE);
   ingredients.add(salsa);
   taco.setIngredients(ingredients);    
-
-  tacoClient.updateTaco(taco);
+  //COMMENTED AFTER ENABLED AUTH
+  //tacoClient.updateTaco(taco);
 
   //DELETE
-  tacoClient.deleteTaco(taco);
+  //COMMENTED AFTER ENABLED AUTH
+  //tacoClient.deleteTaco(taco);
   //POST
   System.out.println("》》》POST 《《《");
   Taco tacoPost = new Taco();
@@ -142,8 +144,9 @@ Ingredient1 sourCream =
   tacoPost.setName("PostCreated");
   tacoPost.setCreatedAt(createdAt);
   tacoPost.setIngredients(ingredients);
-  System.out.println("Taco Created: "
-        +tacoClient.createTaco(tacoPost));
+  //COMMENTED AFTER ENABLED AUTH
+  //System.out.println("Taco Created: "
+  //      +tacoClient.createTaco(tacoPost));
       }
     };
   }

@@ -16,3 +16,15 @@ curl localhost:8081/api/tacos/8
 curl localhost:8081/api/tacos/2
 curl localhost:8081/api/tacos -X PUT -H "Content-Type: application/json" -d '{"id":2,"name":"CarnivorePuTModId2","createdAt":"2023-05-16T18:38:12.787+00:00","ingredients":[ {"id":"CHED","name":"Cheddar","type":"CHEESE"}]}'
 
+###########
+### CH8 ###
+###########
+
+curl http://localhost:8081/api/ingredients
+
+curl -XPOST -d '{"id":"TEST","name":"Test post Ingredient","type":"WRAP"}' -H "Content-Type: application/json" localhost:8081/api/ingredients -v
+
+curl http://localhost:8081/api/ingredients/TEST -X DELETE
+
+
+
