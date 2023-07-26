@@ -12,9 +12,15 @@ spring:
      cache: false
   security:
      enabled: false
+     oauth2:
+       resourceserver:
+         jwt:
+           jwk-set-uri: http://localhost:9000/oauth2/jwks
   data:
      rest:
       base-path: /data-api
+  main:
+     allow-circular-references: true
 
 #server.port=8443
 #server.ssl.key-store=classpath:tomcat.jks

@@ -50,8 +50,15 @@ public class SecurityConfig
             
   /*.mvcMatchers(HttpMethod.GET, "/api/**")
    .access("permitAll") */
-  .mvcMatchers(HttpMethod.POST, "/api/**")
-   .authenticated()
+   
+    .antMatchers(HttpMethod.POST, "/api/ingredients")
+       .hasAuthority("SCOPE_writeIngredients")
+    .antMatchers(HttpMethod.DELETE, "/api/ingredients")
+       .hasAuthority("SCOPE_deleteIngredients")
+   
+                
+  /*.mvcMatchers(HttpMethod.POST, "/api/**")
+   .authenticated() */
 
    .mvcMatchers("/orders/**", "/design/**")
              .access("hasRole('USER')")
@@ -73,7 +80,9 @@ public class SecurityConfig
           .headers()
            .frameOptions()
             .sameOrigin()
-
+          
+           .and()
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt())
 
         ;
 //disable in order to send post request

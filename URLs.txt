@@ -26,5 +26,13 @@ curl -XPOST -d '{"id":"TEST","name":"Test post Ingredient","type":"WRAP"}' -H "C
 
 curl http://localhost:8081/api/ingredients/TEST -X DELETE
 
+#Resource Server
+curl localhost:8081/api/ingredients -H "Content-type: application/json" -d '{"id":"CRKT", "name":"Legless Crickets", "type":"PROTEIN"}'
 
+curl localhost:8081/api/ingredients \
+-H "Content-type: application/json" \
+-d '{"id":"SHMP", "name":"Coconut Shrimp", "type":"PROTEIN"}' \
+-H "Authorization: Bearer $token"
+
+curl localhost:9000/oauth2/token -H "Content-type: application/x-www-form-urlencoded" -d"grant_type=refresh_token&refresh_token=$refreshToken" -u taco-admin-client:secret
 

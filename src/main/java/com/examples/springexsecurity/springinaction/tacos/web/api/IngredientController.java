@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  import org.springframework.web.bind.annotation.ResponseStatus;
  import org.springframework.web.bind.annotation.RestController;
 
- import org.springframework.security.access.prepost.PreAuthorize;
+ //import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.examples.springexsecurity.springinaction.tacos.data.IngredientRepository;
 import com.examples.springexsecurity.springinaction.tacos.Ingredient1;
@@ -42,7 +42,7 @@ public class IngredientController {
  
  @PostMapping
  @ResponseStatus(HttpStatus.CREATED)
- @PreAuthorize("hasRole('ADMIN')")
+ //@PreAuthorize("hasRole('ADMIN')")
  public Ingredient1 savaIngredient(
     @RequestBody Ingredient1 ingredient){
     
@@ -52,7 +52,7 @@ public class IngredientController {
 
  @DeleteMapping("/{id}")
  @ResponseStatus(HttpStatus.NO_CONTENT)
- @PreAuthorize("hasRole('USER')")
+ //@PreAuthorize("hasRole('USER')")
  public void deleteIngredient(
          @PathVariable String id){
 
